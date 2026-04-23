@@ -20,13 +20,21 @@ class ImprovViewModel(application: Application) : AndroidViewModel(application) 
     private val _currentPrompt = MutableStateFlow("")
     val currentPrompt: StateFlow<String> = _currentPrompt.asStateFlow()
 
-    fun generatePrompt(mode: String) {
+    private val _isNormalMode = MutableStateFlow(true)
+    val isNormalMode: StateFlow<Boolean> = _isNormalMode.asStateFlow()
+
+    fun toggleMode() {
+        _isNormalMode.value = !_isNormalMode.value
+    }
+
+    fun generatePrompt() {
         viewModelScope.launch {
             val avoidRepeats = settingsRepository.avoidRecentRepeats.first()
             val recentList = if (avoidRepeats) sessionState.recentPrompts.toList() else emptyList()
-            val prompt = when (mode) {
-                "difficult" -> ImprovData.generateDifficultPrompt(recentList)
-                else -> ImprovData.generateNormalPrompt(recentList)
+            val prompt = if (_isNormalMode.value) {
+                ImprovData.generateNormalPrompt(recentList)
+            } else {
+                ImprovData.generateDifficultPrompt(recentList)
             }
             sessionState.addPrompt(prompt)
             _currentPrompt.value = prompt
