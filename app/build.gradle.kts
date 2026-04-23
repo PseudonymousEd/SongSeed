@@ -18,6 +18,8 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    setProperty("archivesBaseName", "SongSeed-v${defaultConfig.versionName}")
+
     buildTypes {
         release {
             isMinifyEnabled = false
