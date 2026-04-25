@@ -1,0 +1,17 @@
+Slant Rhyme Drill
+
+This will be another separate main category of the app, at the same level as Improv Song and Rhyme Drill.
+
+This will be a little different, but similar to the Rhyme Drill.
+
+The user will be given a word from the list of Slide Rhyme Seeds, such as:
+
+wake
+
+The user will then have the option to either see the next word (like in the Rhyme Drill) or see an example of a slant rhyme.
+For "wake", the slant rhyme example will be "wait"
+
+
+These slant rhymes will be separate from the rhyme words.
+
+Initialize the slant rhyme list with 20 slant rhymes.
