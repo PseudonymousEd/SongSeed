@@ -53,9 +53,11 @@ object WordData {
         Word("key", 1), Word("see", 1), Word("flee", 1), Word("knee", 1),
         Word("raw", 1), Word("draw", 1), Word("saw", 1), Word("claw", 1),
         Word("thaw", 1), Word("jaw", 1), Word("law", 1), Word("flaw", 1),
+        Word("more", 1), Word("floor", 1), Word("grease", 1), Word("cease", 1),
+        Word("share", 1), Word("wear", 1), Word("yay", 1), Word("scare", 1),
 
         // Multi-syllable, longer than 5 chars (Normal mode)
-        Word("window", 2), Word("silver", 2), Word("stranger", 2),
+        Word("window", 2), Word("silver", 2), Word("stranger", 2), Word("prepare", 2),
         Word("whisper", 2), Word("midnight", 2), Word("thunder", 2),
         Word("nowhere", 2), Word("answer", 2), Word("summer", 2),
         Word("winter", 2), Word("picture", 2), Word("heaven", 2),
