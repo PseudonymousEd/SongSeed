@@ -30,6 +30,8 @@ object SlantRhymeData {
         SlantRhymePair("cloud", "round"),
         SlantRhymePair("squeak", "grease"),
         SlantRhymePair("cat", "sad"),
-        SlantRhymePair("ways", "grace")
+        SlantRhymePair("ways", "grace"),
+        SlantRhymePair("might", "hype"),
+        SlantRhymePair("hype", "right"),
     )
 }
