@@ -1,0 +1,17 @@
+Rhyme Word Update Script
+
+Create a script that will update the rhyme word file:  WordData.kt
+
+The python script will take a list of one syllable words through the command line (python add_words.py light rain blue)
+
+The script should change all input words into lower case.
+It will check to see if the words are already included in the rhyme word file.
+For each word, the script checks if the word is already in the file. If it isn't, it adds it.
+In the end, the script outputs how many words were added (does not say which words were added).
+
+No validation on how many syllables the word has.
+These will all be categorized as easy words in the app.
+
+The python script will be added into the support directory.
+
+
