@@ -1,6 +1,6 @@
 # DevCycle 006: Loose Rhymes – Hard Ending Shift
 
-**Status:** Planning
+**Status:** Work Complete
 **Start Date:** 2026-04-25
 **Target Completion:** 2026-04-26
 **Focus:** Introduce a "Loose Rhymes" category with a subcategory screen, and add Hard Ending Shift as the first new subcategory under it.
@@ -21,11 +21,11 @@ The Home screen has a "Loose Rhymes" button. Tapping it opens a subcategory sele
 
 ### Phase 1: Data
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] Create `HardEndingShiftData.kt` in the `data/` package
-  - Define `data class HardEndingShiftPair(val prompt: String, val example: String)`
-    - Note: either member of a pair can serve as the drill word; the split into `prompt`/`example` is presentational only
+- [x] Create `HardEndingShiftData.kt` in the `data/` package
+  - Define `data class HardEndingShiftPair(val wordA: String, val wordB: String)`
+    - Note: either member of a pair can serve as the drill word; the ViewModel randomly assigns which is shown as seed vs example
   - Populate `val allPairs: List<HardEndingShiftPair>` with the 15 starter pairs from the design doc
 
 **Technical Notes:**
@@ -42,9 +42,9 @@ red→bet, mud→cut
 
 ### Phase 2: ViewModel
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] Create `HardEndingShiftViewModel.kt` in the `viewmodel/` package
+- [x] Create `HardEndingShiftViewModel.kt` in the `viewmodel/` package
   - `currentPair: StateFlow<HardEndingShiftPair?>` — the active prompt/example pair
   - `isExampleVisible: StateFlow<Boolean>` — whether the example is currently shown
   - `nextWord()` — picks a new random pair (avoiding the current one), resets `isExampleVisible` to `false`
@@ -57,14 +57,14 @@ Plain `ViewModel` (not `AndroidViewModel`) — no settings dependency at this st
 
 ### Phase 3: Hard Ending Shift Screens
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] Create `HardEndingShiftDescriptionScreen.kt` in `ui/screens/`
+- [x] Create `HardEndingShiftDescriptionScreen.kt` in `ui/screens/`
   - `TopAppBar` with back navigation and title "Hard Ending Shift"
   - Description text block explaining the pattern
   - Example pairs displayed as a short list (cod→pot, bad→cat, bed→step)
   - "Start Drill" `Button` that navigates to the drill screen
-- [ ] Create `HardEndingShiftDrillScreen.kt` in `ui/screens/`
+- [x] Create `HardEndingShiftDrillScreen.kt` in `ui/screens/`
   - `TopAppBar` with back navigation and title "Hard Ending Shift"
   - Prompt word in a `Card` matching `SlantRhymeDrillScreen`'s style
   - Example text below the card, visible only when `isExampleVisible == true`
@@ -78,24 +78,24 @@ Plain `ViewModel` (not `AndroidViewModel`) — no settings dependency at this st
 
 ### Phase 4: Subcategory Screen and Navigation Restructuring
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] Add routes to `Screen.kt`:
+- [x] Add routes to `Screen.kt`:
   - `LooseRhymes : Screen("loose_rhymes")`
   - `HardEndingShiftDescription : Screen("hard_ending_shift_description")`
   - `HardEndingShiftDrill : Screen("hard_ending_shift_drill")`
-- [ ] Create `LooseRhymesSubcategoryScreen.kt` in `ui/screens/`
+- [x] Create `LooseRhymesSubcategoryScreen.kt` in `ui/screens/`
   - `TopAppBar` with back navigation and title "Loose Rhymes"
-  - Three buttons: **Default**, **All** (disabled/greyed out — deferred), **Hard Ending Shift**
+  - Three buttons: **Default**, **All** (disabled — coming soon), **Hard Ending Shift**
   - **Default** navigates to `Screen.SlantRhymeDrill`
   - **Hard Ending Shift** navigates to `Screen.HardEndingShiftDescription`
-- [ ] Update `AppNavigation.kt`:
+- [x] Update `AppNavigation.kt`:
   - Add `composable(Screen.LooseRhymes.route)` → `LooseRhymesSubcategoryScreen`
   - Add `composable(Screen.HardEndingShiftDescription.route)` → `HardEndingShiftDescriptionScreen`
   - Add `composable(Screen.HardEndingShiftDrill.route)` → `HardEndingShiftDrillScreen`
-- [ ] Update `HomeScreen.kt`:
-  - Rename the "Slant Rhyme Drill" button label to **"Loose Rhymes"**
-  - The click handler now navigates to `Screen.LooseRhymes` instead of `Screen.SlantRhymeDrill`
+- [x] Update `HomeScreen.kt`:
+  - Renamed "Slant Rhyme Drill" button label to **"Loose Rhymes"**
+  - Renamed `onSlantRhymeDrillClick` to `onLooseRhymesClick`, navigates to `Screen.LooseRhymes`
 
 **Technical Notes:**
 The existing `SlantRhymeDrill` route and screen are unchanged — only the home button's label and destination change. `AppNavigation.kt`'s existing `HomeScreen` composable call passes `onSlantRhymeDrillClick`; rename this parameter to `onLooseRhymesClick` for clarity and update all three files (`HomeScreen.kt`, `AppNavigation.kt`, and the call site) together.
@@ -124,16 +124,23 @@ The **All** button can be shown but disabled (`enabled = false`) with a note lik
 
 ## Completion Summary
 
-*Fill in when the cycle closes.*
-
-**Completion Date:**
-**Phases Completed:**
-**Work Deferred:**
+**Completion Date:** 2026-04-25
+**Phases Completed:** All (1–4)
+**Work Deferred:** None
 
 **Accomplishments:**
+- Created `HardEndingShiftData.kt` with `HardEndingShiftPair` data class and 15 starter pairs
+- Created `HardEndingShiftViewModel.kt` — randomly assigns which word is seed vs example, matching `SlantRhymeViewModel` pattern
+- Created `HardEndingShiftDescriptionScreen.kt` — description, example list, "Start Drill" CTA
+- Created `HardEndingShiftDrillScreen.kt` — prompt card, "Show Example" / "Next Word" buttons
+- Created `LooseRhymesSubcategoryScreen.kt` — Default, All (disabled), Hard Ending Shift buttons
+- Added `LooseRhymes`, `HardEndingShiftDescription`, `HardEndingShiftDrill` routes to `Screen.kt`
+- Updated `AppNavigation.kt` with three new composable destinations
+- Updated `HomeScreen.kt`: renamed param to `onLooseRhymesClick`, button label to "Loose Rhymes"
 
 **Metrics:**
-- Files created:
-- Files modified:
+- Files created: 5 (`HardEndingShiftData.kt`, `HardEndingShiftViewModel.kt`, `HardEndingShiftDescriptionScreen.kt`, `HardEndingShiftDrillScreen.kt`, `LooseRhymesSubcategoryScreen.kt`)
+- Files modified: 3 (`Screen.kt`, `AppNavigation.kt`, `HomeScreen.kt`)
 
 **Lessons / Notes:**
+Used symmetric `wordA`/`wordB` field names instead of `prompt`/`example` in the data class — matches `SlantRhymePair` and correctly reflects that either word can be the drill seed. The ViewModel handles the presentational assignment at runtime.

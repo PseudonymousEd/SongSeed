@@ -5,8 +5,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.songseed.songseedclaude.ui.screens.HardEndingShiftDescriptionScreen
+import com.songseed.songseedclaude.ui.screens.HardEndingShiftDrillScreen
 import com.songseed.songseedclaude.ui.screens.HomeScreen
 import com.songseed.songseedclaude.ui.screens.ImprovPromptScreen
+import com.songseed.songseedclaude.ui.screens.LooseRhymesSubcategoryScreen
 import com.songseed.songseedclaude.ui.screens.RhymeDrillScreen
 import com.songseed.songseedclaude.ui.screens.SettingsScreen
 import com.songseed.songseedclaude.ui.screens.SlantRhymeDrillScreen
@@ -22,7 +25,7 @@ fun AppNavigation(navController: NavHostController, modifier: Modifier = Modifie
             HomeScreen(
                 onImprovClick = { navController.navigate(Screen.ImprovPrompt.route) },
                 onRhymeDrillClick = { navController.navigate(Screen.RhymeDrill.route) },
-                onSlantRhymeDrillClick = { navController.navigate(Screen.SlantRhymeDrill.route) },
+                onLooseRhymesClick = { navController.navigate(Screen.LooseRhymes.route) },
                 onSettingsClick = { navController.navigate(Screen.Settings.route) }
             )
         }
@@ -39,6 +42,25 @@ fun AppNavigation(navController: NavHostController, modifier: Modifier = Modifie
         composable(Screen.SlantRhymeDrill.route) {
             SlantRhymeDrillScreen(
                 onBack = { navController.popBackStack() }
+            )
+        }
+        composable(Screen.LooseRhymes.route) {
+            LooseRhymesSubcategoryScreen(
+                onBack = { navController.popBackStack() },
+                onDefaultClick = { navController.navigate(Screen.SlantRhymeDrill.route) },
+                onHardEndingShiftClick = { navController.navigate(Screen.HardEndingShiftDescription.route) }
+            )
+        }
+        composable(Screen.HardEndingShiftDescription.route) {
+            HardEndingShiftDescriptionScreen(
+                onBack = { navController.popBackStack() },
+                onStartDrill = { navController.navigate(Screen.HardEndingShiftDrill.route) }
+            )
+        }
+        composable(Screen.HardEndingShiftDrill.route) {
+            HardEndingShiftDrillScreen(
+                onBack = { navController.popBackStack() },
+                onHome = { navController.popBackStack(Screen.Home.route, inclusive = false) }
             )
         }
         composable(Screen.Settings.route) {

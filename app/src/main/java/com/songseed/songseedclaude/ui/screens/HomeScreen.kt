@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.sp
 fun HomeScreen(
     onImprovClick: () -> Unit,
     onRhymeDrillClick: () -> Unit,
-    onSlantRhymeDrillClick: () -> Unit,
+    onLooseRhymesClick: () -> Unit,
     onSettingsClick: () -> Unit
 ) {
     Column(
@@ -73,12 +73,12 @@ fun HomeScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
-            onClick = onSlantRhymeDrillClick,
+            onClick = onLooseRhymesClick,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp)
         ) {
-            Text("Slant Rhyme Drill", fontSize = 18.sp)
+            Text("Loose Rhymes", fontSize = 18.sp)
         }
 
         Spacer(modifier = Modifier.height(48.dp))
