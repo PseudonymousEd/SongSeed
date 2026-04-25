@@ -1,6 +1,6 @@
 # DevCycle 004: Slant Rhyme Drill
 
-**Status:** Planning
+**Status:** Work Complete
 **Start Date:** 2026-04-25
 **Target Completion:** 2026-04-25
 **Focus:** Add a Slant Rhyme Drill as a new top-level feature, giving users a seed word and the option to reveal a slant rhyme example for practice.
@@ -21,9 +21,9 @@ A new "Slant Rhyme Drill" button appears on the Home screen alongside Improv Son
 
 ### Phase 1: Data
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] Create `SlantRhymeData.kt` in the `data/` package
+- [x] Create `SlantRhymeData.kt` in the `data/` package
   - Define `data class SlantRhymePair(val seed: String, val example: String)`
   - Populate `val allPairs: List<SlantRhymePair>` with 20 seed/example pairs
 
@@ -34,9 +34,9 @@ A new "Slant Rhyme Drill" button appears on the Home screen alongside Improv Son
 
 ### Phase 2: ViewModel
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] Create `SlantRhymeViewModel.kt` in the `viewmodel/` package
+- [x] Create `SlantRhymeViewModel.kt` in the `viewmodel/` package
   - `currentPair: StateFlow<SlantRhymePair?>` — the active seed/example pair
   - `isExampleVisible: StateFlow<Boolean>` — whether the slant rhyme example is currently shown
   - `nextWord()` — picks a new random pair (avoiding the current one), sets `isExampleVisible` to `false`
@@ -51,9 +51,9 @@ A `LaunchedEffect(Unit)` in the screen will call `nextWord()` on first entry, sa
 
 ### Phase 3: Screen and Navigation
 
-**Status:** Planning
+**Status:** Work Complete
 
-- [ ] Create `SlantRhymeDrillScreen.kt` in the `ui/screens/` package
+- [x] Create `SlantRhymeDrillScreen.kt` in the `ui/screens/` package
   - `Scaffold` with `TopAppBar` ("Slant Rhyme Drill") and back navigation arrow
   - Seed word displayed in a `Card` matching `RhymeDrillScreen`'s style
   - Below the card: slant rhyme example text, visible only when `isExampleVisible == true`
@@ -81,17 +81,21 @@ The `HomeScreen` composable currently has three parameters: `onImprovClick`, `on
 
 ## Completion Summary
 
-*Fill in when the cycle closes.*
-
-**Completion Date:**
-**Phases Completed:**
-**Work Deferred:**
+**Completion Date:** 2026-04-25
+**Phases Completed:** All (1–3)
+**Work Deferred:** None
 
 **Accomplishments:**
--
+- Created `SlantRhymeData.kt` with `SlantRhymePair` data class and 20 seed/example pairs
+- Created `SlantRhymeViewModel.kt` with `currentPair`, `isExampleVisible` state flows and `nextWord()`/`showExample()` actions
+- Created `SlantRhymeDrillScreen.kt` — seed word card, revealed example text, "Show Slant Rhyme" / "Next Word" buttons
+- Added `SlantRhymeDrill` route to `Screen.kt`
+- Added composable destination and Home wiring to `AppNavigation.kt`
+- Added `onSlantRhymeDrillClick` parameter and "Slant Rhyme Drill" button to `HomeScreen.kt`
 
 **Metrics:**
-- Files created:
-- Files modified:
+- Files created: 3 (`SlantRhymeData.kt`, `SlantRhymeViewModel.kt`, `SlantRhymeDrillScreen.kt`)
+- Files modified: 3 (`Screen.kt`, `AppNavigation.kt`, `HomeScreen.kt`)
 
 **Lessons / Notes:**
+Plain `ViewModel` (not `AndroidViewModel`) works here since there's no settings dependency — keeps the class simpler. "Show Slant Rhyme" button hides itself after tap so "Next Word" becomes the only forward action, avoiding a redundant second tap.

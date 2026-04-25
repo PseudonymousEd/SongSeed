@@ -9,6 +9,7 @@ import com.songseed.songseedclaude.ui.screens.HomeScreen
 import com.songseed.songseedclaude.ui.screens.ImprovPromptScreen
 import com.songseed.songseedclaude.ui.screens.RhymeDrillScreen
 import com.songseed.songseedclaude.ui.screens.SettingsScreen
+import com.songseed.songseedclaude.ui.screens.SlantRhymeDrillScreen
 
 @Composable
 fun AppNavigation(navController: NavHostController, modifier: Modifier = Modifier) {
@@ -21,6 +22,7 @@ fun AppNavigation(navController: NavHostController, modifier: Modifier = Modifie
             HomeScreen(
                 onImprovClick = { navController.navigate(Screen.ImprovPrompt.route) },
                 onRhymeDrillClick = { navController.navigate(Screen.RhymeDrill.route) },
+                onSlantRhymeDrillClick = { navController.navigate(Screen.SlantRhymeDrill.route) },
                 onSettingsClick = { navController.navigate(Screen.Settings.route) }
             )
         }
@@ -31,6 +33,11 @@ fun AppNavigation(navController: NavHostController, modifier: Modifier = Modifie
         }
         composable(Screen.RhymeDrill.route) {
             RhymeDrillScreen(
+                onBack = { navController.popBackStack() }
+            )
+        }
+        composable(Screen.SlantRhymeDrill.route) {
+            SlantRhymeDrillScreen(
                 onBack = { navController.popBackStack() }
             )
         }
