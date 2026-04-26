@@ -28,7 +28,8 @@ import androidx.compose.ui.unit.sp
 fun LooseRhymesSubcategoryScreen(
     onBack: () -> Unit,
     onDefaultClick: () -> Unit,
-    onHardEndingShiftClick: () -> Unit
+    onHardEndingShiftClick: () -> Unit,
+    onMultiSyllableClick: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -88,6 +89,17 @@ fun LooseRhymesSubcategoryScreen(
                     .height(56.dp)
             ) {
                 Text("Hard Ending Shift", fontSize = 18.sp)
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Button(
+                onClick = onMultiSyllableClick,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+            ) {
+                Text("Multi-Syllable", fontSize = 18.sp)
             }
         }
     }

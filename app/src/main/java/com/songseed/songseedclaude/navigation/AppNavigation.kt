@@ -10,6 +10,8 @@ import com.songseed.songseedclaude.ui.screens.HardEndingShiftDrillScreen
 import com.songseed.songseedclaude.ui.screens.HomeScreen
 import com.songseed.songseedclaude.ui.screens.ImprovPromptScreen
 import com.songseed.songseedclaude.ui.screens.LooseRhymesSubcategoryScreen
+import com.songseed.songseedclaude.ui.screens.MultiSyllableDescriptionScreen
+import com.songseed.songseedclaude.ui.screens.MultiSyllableDrillScreen
 import com.songseed.songseedclaude.ui.screens.RhymeDrillScreen
 import com.songseed.songseedclaude.ui.screens.SettingsScreen
 import com.songseed.songseedclaude.ui.screens.SlantRhymeDrillScreen
@@ -48,7 +50,8 @@ fun AppNavigation(navController: NavHostController, modifier: Modifier = Modifie
             LooseRhymesSubcategoryScreen(
                 onBack = { navController.popBackStack() },
                 onDefaultClick = { navController.navigate(Screen.SlantRhymeDrill.route) },
-                onHardEndingShiftClick = { navController.navigate(Screen.HardEndingShiftDescription.route) }
+                onHardEndingShiftClick = { navController.navigate(Screen.HardEndingShiftDescription.route) },
+                onMultiSyllableClick = { navController.navigate(Screen.MultiSyllableDescription.route) }
             )
         }
         composable(Screen.HardEndingShiftDescription.route) {
@@ -59,6 +62,18 @@ fun AppNavigation(navController: NavHostController, modifier: Modifier = Modifie
         }
         composable(Screen.HardEndingShiftDrill.route) {
             HardEndingShiftDrillScreen(
+                onBack = { navController.popBackStack() },
+                onHome = { navController.popBackStack(Screen.Home.route, inclusive = false) }
+            )
+        }
+        composable(Screen.MultiSyllableDescription.route) {
+            MultiSyllableDescriptionScreen(
+                onBack = { navController.popBackStack() },
+                onStartDrill = { navController.navigate(Screen.MultiSyllableDrill.route) }
+            )
+        }
+        composable(Screen.MultiSyllableDrill.route) {
+            MultiSyllableDrillScreen(
                 onBack = { navController.popBackStack() },
                 onHome = { navController.popBackStack(Screen.Home.route, inclusive = false) }
             )
